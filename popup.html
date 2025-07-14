@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generador Correos Gmail</title>
+  <style>
+    body { background: #f5f5f5; margin:0; font-family: sans-serif; }
+    .container { width:340px; margin:0 auto; background:#fff; border-radius:8px; box-shadow:0 2px 8px #0002; padding:20px; }
+    h2 { color:#4285f4; margin-bottom:10px; font-size:20px; text-align:center; }
+    .drop { border:2px dashed #4285f4; border-radius:6px; background:#eef5fd; padding:14px; text-align:center; margin-bottom:10px; cursor:pointer;}
+    .drop:hover { background:#dde8fb;}
+    .file-info { margin-bottom:10px; font-size:13px; color:#444; display: flex; align-items: center; gap: 8px;}
+    #refreshBtn { cursor:pointer; font-size: 16px; }
+    .preview-list {
+      overflow-y: auto;
+      max-height: 230px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .preview-card {
+      padding:8px 6px;
+      border-radius:6px;
+      background:#f3f6fa;
+      box-shadow:0 1px 4px #0001;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .preview-card-id {
+      font-weight:bold; color:#4285f4; font-size:15px;
+    }
+    .preview-card-asunto {
+      font-size: 14px;
+    }
+    .preview-card-dest {
+      color:#666; font-size: 13px;
+    }
+    .actions { 
+        text-align:center; 
+        margin-top: 18px; /* <-- Añade esta línea o ajusta el valor */
+    }
+    button { padding:9px 16px; background:#4285f4; color:#fff; border:none; border-radius:4px; font-weight:600; cursor:pointer; font-size:14px;}
+    button:disabled { background:#e0e0e0; color:#aaa; cursor: not-allowed;}
+    .msg { text-align:center; margin-top:10px; font-size:13px; }
+    .msg.success { color: #388e3c;}
+    .msg.error { color:#d32f2f;}
+    .descarga-plantilla {
+      text-align:right; margin-top:18px;
+    }
+    .descarga-plantilla a {
+      font-size:12px; color:#4285f4; text-decoration:none; opacity:0.7;
+    }
+    .descarga-plantilla a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+  </style>
+  <script src="xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Generador de Correos</h2>
+    <div class="drop" id="dragDropArea">
+      <div>📄 Arrastra o selecciona tu archivo Excel</div>
+      <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" style="display:none;">
+    </div>
+    <div class="file-info" id="fileInfo">
+      <span id="refreshBtn" title="Actualizar archivo" style="display:none;">🔄</span>
+      <span id="fileName"></span>
+    </div>
+    <div class="preview-list" id="preview" style="display:none;"></div>
+    <div class="actions">
+      <button id="processBtn" disabled>Crear borradores</button>
+    </div>
+    <div class="msg" id="msg"></div>
+    <div class="descarga-plantilla">
+      <a id="descargarPlantilla" href="plantilla_correos.xlsx" download>
+        📥 Descargar plantilla
+      </a>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
